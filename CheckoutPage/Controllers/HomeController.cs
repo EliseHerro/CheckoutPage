@@ -18,24 +18,21 @@ namespace CheckoutPage.Controllers
 
         public ViewResult ProductPage()
         {
-            var product = new ProductModel() { Name = "coin", RetailPrice = "1" };
+            var product = new ProductModel() { Name = "coin", RetailPrice = 100 };
             return View(product);
         }
 
 
         public ActionResult StripePay()
         {
+            ViewBag.StripePublishKey = ConfigurationManager.AppSettings["PublishableKey"];
 
-            var stripePublishKey = ConfigurationManager.AppSettings["PublishableKey"];
-   
-   
-            ViewBag.StripePublishKey = "pk_test_PcbswzmLnVWD8jEzByVBWoCE";
-            return View();
+            var product = new ProductModel() { Name = "coin", RetailPrice = 100 };
+            return View(product);
         }
 
-        public ActionResult Charge(string stripeEmail, string stripeToken)
+        public ActionResult Charge(string stripeEmail, string stripeToken, int RetailPrice)
         {
-           
             var customers = new CustomerService();
             var charges = new ChargeService();
 
@@ -52,8 +49,8 @@ namespace CheckoutPage.Controllers
                 Currency = "usd",
                 CustomerId = customer.Id
             });
-
-            
+            //save this info in a database customer
+            //pass the customer 
 
             return View();
         }

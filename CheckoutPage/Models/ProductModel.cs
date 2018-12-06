@@ -8,7 +8,7 @@ namespace CheckoutPage.Models
     public class ProductModel
     {
         public string Name { get; set; }
-        public string RetailPrice { get; set; }
+        public int RetailPrice { get; set; }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model CheckoutPage.Models.StripeSettings
+﻿@model CheckoutPage.Models.ProductModel
 
     @{
         ViewBag.Title = "StripePay";
@@ -6,17 +6,17 @@
     }
 
 
-    @using (Html.BeginForm("Charge", "Home", "Charge"))
+    @using (Html.BeginForm("Charge", "Home", @Model))
     {
         <article>
-            <label>Amount: $5.00</label>
+            <label>You are getting a magical dime for only: $@(Model.RetailPrice / 100)</label>
         </article>
         <script src="//checkout.stripe.com/v2/checkout.js"
                 class="stripe-button"
                 data-key="@ViewBag.StripePublishKey"
                 data-locale="auto"
                 data-description="Sample Charge"
-                data-amount="500">
+                data-amount="@Model.RetailPrice">
         </script>
     }
 
