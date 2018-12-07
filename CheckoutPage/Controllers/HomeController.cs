@@ -31,28 +31,36 @@ namespace CheckoutPage.Controllers
             return View(product);
         }
 
-        public ActionResult Charge(string stripeEmail, string stripeToken, int RetailPrice)
+        public ActionResult Charge(string stripeEmail, string stripeToken, int? RetailPrice)
         {
-            var customers = new CustomerService();
-            var charges = new ChargeService();
-
-            var customer = customers.Create(new CustomerCreateOptions
+            var customerChargeViewModel = new CustomerChargeViewModel();
+            try
             {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
+                var customers = new CustomerService();
+                var charges = new ChargeService();
 
-            var charge = charges.Create(new ChargeCreateOptions
-            {
-                Amount = 100,//cent
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
-            //save this info in a database customer
-            //pass the customer and the course as a ViewModel to the view
+                var customer = customers.Create(new CustomerCreateOptions
+                {
+                    Email = stripeEmail,
+                    SourceToken = stripeToken
+                });
 
-            return View();
+                var charge = charges.Create(new ChargeCreateOptions
+                {
+                    Amount = 100,//cent
+                    Description = "Sample Charge",
+                    Currency = "usd",
+                    CustomerId = customer.Id
+                });
+                //save this info in a database customer
+
+                customerChargeViewModel = new CustomerChargeViewModel()
+                {
+                    PricePaid = (int)RetailPrice
+                };
+            } catch { }
+            
+            return View(customerChargeViewModel);
         }
 
 

@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerChargeViewModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\StripeSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
