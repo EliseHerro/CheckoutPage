@@ -5,12 +5,16 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
+<br /><br />
+<img src="~/Content/OneDime.png" alt="One Dime" height="112" width="112" />
 
+<br />
     @using (Html.BeginForm("Charge", "Home", @Model))
     {
         <article>
-            <label>You are getting a magical dime for only: $@(Model.RetailPrice / 100)</label>
+            <h1>You are getting a magical dime for only: $@(Model.RetailPrice / 100)</h1>
         </article>
+        <br />
         <script src="//checkout.stripe.com/v2/checkout.js"
                 class="stripe-button"
                 data-key="@ViewBag.StripePublishKey"

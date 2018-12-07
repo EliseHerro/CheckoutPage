@@ -50,7 +50,7 @@ namespace CheckoutPage.Controllers
                 CustomerId = customer.Id
             });
             //save this info in a database customer
-            //pass the customer 
+            //pass the customer and the course as a ViewModel to the view
 
             return View();
         }
